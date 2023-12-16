@@ -1,0 +1,33 @@
+.card-animation {
+  transition: transform 0.15s ease;
+  width: 245px;
+  height: 130px;
+  cursor: pointer;
+}
+
+.card-animation:hover {
+  transform: scale(1.012);
+}
+
+.card-middle {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.card-status {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.card-total {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 5px;
+  font-size: 1rem;
+}

@@ -1,5 +1,4 @@
-import PropTypes from 'prop-types';
-import { forwardRef } from 'react';
+import { ReactNode, forwardRef } from 'react';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
@@ -15,6 +14,25 @@ const headerSX = {
 };
 
 // ==============================|| CUSTOM - MAIN CARD ||============================== //
+
+type MainCardProps = {
+  border?: boolean;
+  boxShadow?: boolean;
+  content?: boolean;
+  contentSX?: object;
+  darkTitle?: boolean;
+  divider?: boolean;
+  elevation?: number;
+  secondary?: ReactNode;
+  shadow?: string;
+  sx?: object;
+  title?: string | ReactNode;
+  codeHighlight?: boolean;
+  children?: ReactNode;
+  draggable?: boolean;
+  className?: string;
+  onDragStart?: (e: any) => void;
+};
 
 const MainCard = forwardRef(
   (
@@ -32,7 +50,7 @@ const MainCard = forwardRef(
       title,
       codeHighlight,
       ...others
-    },
+    }: MainCardProps,
     ref
   ) => {
     const theme = useTheme();
@@ -41,9 +59,9 @@ const MainCard = forwardRef(
     return (
       <Card
         elevation={elevation || 0}
-        ref={ref}
         {...others}
         sx={{
+          marginBottom: '15px',
           border: border ? '1px solid' : 'none',
           borderRadius: 2,
           borderColor: theme.palette.mode === 'dark' ? theme.palette.divider : theme.palette.grey.A800,
@@ -71,33 +89,17 @@ const MainCard = forwardRef(
         {!content && children}
 
         {/* card footer - clipboard & highlighter  */}
-        {codeHighlight && (
+        {/* {codeHighlight && (
           <>
             <Divider sx={{ borderStyle: 'dashed' }} />
             <Highlighter codeHighlight={codeHighlight} main>
               {children}
             </Highlighter>
           </>
-        )}
+        )} */}
       </Card>
     );
   }
 );
-
-MainCard.propTypes = {
-  border: PropTypes.bool,
-  boxShadow: PropTypes.bool,
-  contentSX: PropTypes.object,
-  darkTitle: PropTypes.bool,
-  divider: PropTypes.bool,
-  elevation: PropTypes.number,
-  secondary: PropTypes.node,
-  shadow: PropTypes.string,
-  sx: PropTypes.object,
-  title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-  codeHighlight: PropTypes.bool,
-  content: PropTypes.bool,
-  children: PropTypes.node
-};
 
 export default MainCard;
