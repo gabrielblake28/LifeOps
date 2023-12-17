@@ -12,6 +12,7 @@ type CreateEpicProps = {
 export const CreateEpic = ({ handleToggle, epic }: CreateEpicProps) => {
   const [epicName, setEpicName] = useState(epic ? epic.title : '');
   const [isEpicValid, setIsEpicValid] = useState(true);
+  const [isEpicNameChanged, setIsEpicNameChanged] = useState(false);
   const { AddEpic, DeleteEpic, UpdateEpic } = useEpicStore();
 
   const handleEpicClick = async () => {
@@ -26,6 +27,8 @@ export const CreateEpic = ({ handleToggle, epic }: CreateEpicProps) => {
     } else {
       setIsEpicValid(true);
     }
+
+    setIsEpicNameChanged(epicName !== (epic ? epic.title : ''));
   }, [epicName]);
 
   const handleEpicNameChange = (event: SelectChangeEvent<HTMLInputElement>) => {
@@ -51,7 +54,7 @@ export const CreateEpic = ({ handleToggle, epic }: CreateEpicProps) => {
           type="submit"
           variant="contained"
           color="primary"
-          disabled={isEpicValid}
+          disabled={isEpicValid || !isEpicNameChanged}
           onClick={handleEpicClick}
           sx={{ mt: 3 }}
         >
