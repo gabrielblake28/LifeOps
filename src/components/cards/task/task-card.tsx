@@ -9,7 +9,7 @@ import dayjs from 'dayjs';
 import { GetDateStatus } from 'utils/DataStatus';
 import { ColumnName, Task } from '../../../Types/Task';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { CreateTask } from 'pages/dashboard/create-task/CreateTask';
 import Transitions from 'components/@extended/Transitions';
 import { usePopperStore } from 'zustand-store/PopperRef';
@@ -24,7 +24,7 @@ type TaskCardProps = {
 };
 
 const TaskCard = ({ task }: TaskCardProps) => {
-  const { taskCardRef, anchorRef } = usePopperStore();
+  const { taskCardRef, taskAnchorRef: anchorRef } = usePopperStore();
   const theme = useTheme();
   const matchesXs = useMediaQuery(theme.breakpoints.down('md'));
   const [open, setOpen] = useState(false);

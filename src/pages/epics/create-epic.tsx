@@ -2,19 +2,22 @@ import { useEffect, useState } from 'react';
 import { Grid, Stack, Typography, SelectChangeEvent, Button } from '@mui/material';
 import { CustomInput } from 'components/CustomInput';
 import { useEpicStore } from 'zustand-store/EpicStore';
-import { EpicStatus } from '../../Types/Epic';
+import { Epic, EpicStatus } from '../../Types/Epic';
 
 type CreateEpicProps = {
   handleToggle: () => void;
+  epic?: Epic;
 };
 
-export const CreateEpic = ({ handleToggle }: CreateEpicProps) => {
-  const [epicName, setEpicName] = useState('');
+export const CreateEpic = ({ handleToggle, epic }: CreateEpicProps) => {
+  const [epicName, setEpicName] = useState(epic ? epic.title : '');
   const [isEpicValid, setIsEpicValid] = useState(true);
-  const { AddEpic } = useEpicStore();
+  const { AddEpic, DeleteEpic, UpdateEpic } = useEpicStore();
 
-  const createEpic = async () => {
-    AddEpic({ title: epicName, status: EpicStatus.IN_PROGRESS, user_id: '1' });
+  const handleEpicClick = async () => {
+    !epic ? AddEpic({ title: epicName, status: EpicStatus.IN_PROGRESS, user_id: '1' }) : UpdateEpic({ ...epic, title: epicName });
+
+    handleToggle();
   };
 
   useEffect(() => {
@@ -29,16 +32,11 @@ export const CreateEpic = ({ handleToggle }: CreateEpicProps) => {
     setEpicName(event.target.value as string);
   };
 
-  const CreateEpic = () => {
-    createEpic();
-    handleToggle();
-  };
-
   return (
     <Grid container spacing={3} padding={3} paddingTop={0}>
       <Grid item xs={12}>
         <Stack direction="row" justifyContent="space-between" alignItems="baseline" sx={{ mb: { xs: -0.5, sm: -1 } }}>
-          <Typography variant="h3">Create an epic</Typography>
+          <Typography variant="h3">{`${epic ? 'Edit' : 'Create'} an epic`}</Typography>
         </Stack>
       </Grid>
       <Grid item xs={12}>
@@ -54,11 +52,31 @@ export const CreateEpic = ({ handleToggle }: CreateEpicProps) => {
           variant="contained"
           color="primary"
           disabled={isEpicValid}
-          onClick={CreateEpic}
+          onClick={handleEpicClick}
           sx={{ mt: 3 }}
         >
-          create epic
+          {`${epic ? 'Update' : 'Create'} epic`}
         </Button>
+        {epic ? (
+          <Button
+            disableElevation
+            fullWidth
+            size="large"
+            type="submit"
+            variant="contained"
+            color="error"
+            disabled={isEpicValid}
+            onClick={() => {
+              DeleteEpic(epic.id ?? '');
+              handleToggle();
+            }}
+            sx={{ mt: 3 }}
+          >
+            {'Delete Epic'}
+          </Button>
+        ) : (
+          <> </>
+        )}
       </Grid>
     </Grid>
   );

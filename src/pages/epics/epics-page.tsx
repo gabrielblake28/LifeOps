@@ -27,7 +27,6 @@ const EpicsPage = () => {
             </div>
           </div>
         </div>
-        <div className="epics-list"></div>
       </div>
     </MainCard>
   );

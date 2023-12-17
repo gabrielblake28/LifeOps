@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { useTheme } from '@mui/material/styles';
 import { Box, ClickAwayListener, IconButton, Paper, Popper, useMediaQuery } from '@mui/material';
 import MainCard from 'components/MainCard';
@@ -6,10 +6,11 @@ import Transitions from 'components/@extended/Transitions';
 
 import { CloseOutlined, PlusOutlined } from '@ant-design/icons';
 import { CreateEpic } from './create-epic';
+import { usePopperStore } from 'zustand-store/PopperRef';
 export const CreateEpicButton = () => {
   const theme = useTheme();
   const matchesXs = useMediaQuery(theme.breakpoints.down('md'));
-  const anchorRef = useRef<HTMLButtonElement | null>(null);
+  const { epicAnchorRef: anchorRef } = usePopperStore();
   const [open, setOpen] = useState(false);
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);

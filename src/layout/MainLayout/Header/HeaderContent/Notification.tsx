@@ -10,7 +10,7 @@ import { CreateTask } from 'pages/dashboard/create-task/CreateTask';
 const Notification = () => {
   const theme = useTheme();
   const matchesXs = useMediaQuery(theme.breakpoints.down('md'));
-  const { anchorRef } = usePopperStore();
+  const { taskAnchorRef: anchorRef } = usePopperStore();
   const [open, setOpen] = useState(false);
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);

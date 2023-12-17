@@ -3,10 +3,14 @@ import { create } from 'zustand';
 
 interface PopperRefStore {
   taskCardRef: React.RefObject<HTMLDivElement>;
-  anchorRef: React.RefObject<HTMLButtonElement>;
+  taskAnchorRef: React.RefObject<HTMLButtonElement>;
+  epicCardRef: React.RefObject<HTMLDivElement>;
+  epicAnchorRef: React.RefObject<HTMLButtonElement>;
 }
 
 export const usePopperStore = create<PopperRefStore>((set) => ({
-  anchorRef: createRef(),
-  taskCardRef: createRef()
+  taskAnchorRef: createRef(),
+  taskCardRef: createRef(),
+  epicAnchorRef: createRef(),
+  epicCardRef: createRef()
 }));

@@ -7,6 +7,8 @@ interface EpicStore {
   Epics: Epic[];
   FetchEpics: (user_id: string) => Promise<void>;
   AddEpic: (epicPayload: CreateEpicPayload) => Promise<void>;
+  UpdateEpic: (epicPayload: Epic) => Promise<void>;
+  DeleteEpic: (id: string) => Promise<void>;
 }
 export const useEpicStore = create<EpicStore>((set) => ({
   Epics: [],
@@ -32,6 +34,32 @@ export const useEpicStore = create<EpicStore>((set) => ({
       set(() => ({ Epics: updatedEpics }));
     } catch (error) {
       console.error('Error adding epic:', error);
+    }
+  },
+
+  UpdateEpic: async (epicPayload: Epic) => {
+    try {
+      await epicApi.updateEpic(epicPayload);
+      const updatedEpics = await epicApi.getAllEpics(epicPayload.user_id);
+
+      set(() => ({ Epics: updatedEpics }));
+    } catch (error) {
+      console.error('Error updating epic:', error);
+    }
+  },
+
+  DeleteEpic: async (id: string) => {
+    try {
+      // Make API call to delete epic from the database
+      await epicApi.deleteEpic(id);
+
+      // Make API call to get all epics after deleting the one
+      const updatedEpics = await epicApi.getAllEpics('1');
+
+      // Update store with the fetched list of epics
+      set(() => ({ Epics: updatedEpics }));
+    } catch (error) {
+      console.error('Error deleting epic:', error);
     }
   }
 }));

@@ -10,8 +10,6 @@ import { EpicStatus } from '../../../Types/Epic';
 import { useTaskStore } from 'zustand-store/TaskStore';
 import { EpicApi } from 'Api/Epic/impl/EpicApi';
 
-const epicApi = new EpicApi();
-
 type CreateTaskProps = {
   handleToggle: () => void;
   Task?: Task;
@@ -93,7 +91,7 @@ export const CreateTask = ({ handleToggle, Task }: CreateTaskProps) => {
     <Grid container spacing={3} padding={3} paddingTop={0}>
       <Grid item xs={12}>
         <Stack direction="row" justifyContent="space-between" alignItems="baseline" sx={{ mb: { xs: -0.5, sm: -1 } }}>
-          <Typography variant="h3"> {Task ? 'Update Task' : Epics.length ? 'Create a Task' : 'Create your first epic'}</Typography>
+          <Typography variant="h3"> {Task ? 'Edit Task' : Epics.length ? 'Create a Task' : 'Create your first epic'}</Typography>
         </Stack>
       </Grid>
       <Grid item xs={12}>
@@ -139,7 +137,7 @@ export const CreateTask = ({ handleToggle, Task }: CreateTaskProps) => {
             disabled={Epics.length ? isTaskValid : isEpicValid}
             onClick={Create}
           >
-            {Task ? 'update Task' : Epics.length ? 'create task' : 'create epic'}
+            {Task ? 'update task' : Epics.length ? 'create task' : 'create epic'}
           </Button>
           {Task ? (
             <Button

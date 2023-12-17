@@ -22,10 +22,10 @@ export class EpicApi implements IEpicApi {
     const result = await (await this.query.get(`/epics/${user_id}`)).data;
     return result.data;
   }
-  async updateEpic(id: string, payload: Epic): Promise<string> {
-    throw new Error('Method not implemented.');
+  async updateEpic(payload: Epic): Promise<string> {
+    return await this.query.put(`/epics/${payload.id}`, payload);
   }
-  deleteEpic(id: string): Promise<void> {
-    throw new Error('Method not implemented.');
+  async deleteEpic(id: string): Promise<void> {
+    await this.query.delete(`/epics/${id}`);
   }
 }
