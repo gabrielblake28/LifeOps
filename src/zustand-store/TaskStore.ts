@@ -9,7 +9,8 @@ interface TaskStore {
   FetchTasks: (user_id: string) => Promise<void>;
   AddTask: (taskPayload: CreateTaskPayload) => Promise<void>;
   GetTaskById: (id: string) => Promise<Task>;
-  UpdateTaskStatusForDashboard: (task: Task, newStatus: ColumnName) => Promise<void>;
+  UpdateTask: (task: Task, newStatus?: ColumnName) => Promise<void>;
+  DeleteTask: (id: string) => Promise<void>;
 }
 export const useTaskStore = create<TaskStore>((set) => ({
   Tasks: {
@@ -38,10 +39,15 @@ export const useTaskStore = create<TaskStore>((set) => ({
     return task;
   },
 
-  UpdateTaskStatusForDashboard: async (task: Task, newStatus: ColumnName) => {
-    console.log(task, newStatus);
-    await taskApi.updateTask({ ...task, status: newStatus });
+  UpdateTask: async (task: Task, newStatus?: ColumnName) => {
+    await taskApi.updateTask({ ...task, status: newStatus ?? task.status });
     const updatedTasks = await taskApi.getAllTasks('1'); // task.user_id
+    set(() => ({ Tasks: updatedTasks }));
+  },
+
+  DeleteTask: async (id: string) => {
+    await taskApi.deleteTask(id);
+    const updatedTasks = await taskApi.getAllTasks('1');
     set(() => ({ Tasks: updatedTasks }));
   }
 }));

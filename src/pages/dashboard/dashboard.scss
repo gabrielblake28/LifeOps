@@ -16,24 +16,31 @@
 .dashboard-column {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: start;
   min-width: 230px;
+  height: 88vh;
 }
 
 .droppable-column {
-  height: 85vh;
   overflow: auto;
   border-radius: 15px;
   padding: 10px;
+  width: auto;
+  height: inherit;
   @media screen and (max-width: 1015px) {
     height: auto;
   }
 }
 
+.droppable-column-hover {
+  border: 2px dashed #007bff; /* Adjust the border style as needed */
+}
+
 /* WebKit browsers like Chrome and Safari */
 .droppable-column::-webkit-scrollbar {
-  width: 6px;
+  // width: 6px;
+  display: none;
 }
 
 .droppable-column::-webkit-scrollbar-thumb {

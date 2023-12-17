@@ -1,19 +1,26 @@
 .card-animation {
   transition: transform 0.15s ease;
   width: 245px;
-  height: 130px;
+  min-height: 130px;
   cursor: pointer;
 }
 
 .card-animation:hover {
-  transform: scale(1.012);
+  transform: scale(1.037);
 }
 
 .card-middle {
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.status-points {
+  display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: flex-start;
 }
 
 .card-status {
@@ -21,6 +28,14 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+}
+
+.edit-card-button {
+  display: none;
+}
+
+.card-animation:hover .edit-card-button {
+  display: inline-block !important;
 }
 
 .card-total {

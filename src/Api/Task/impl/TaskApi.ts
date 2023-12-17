@@ -25,6 +25,6 @@ export class TaskApi implements ITaskApi {
     return await this.query.put(`/tasks/${payload.id}`, payload);
   }
   async deleteTask(id: string): Promise<void> {
-    throw new Error('Method not implemented.');
+    await this.query.delete(`/tasks/${id}`);
   }
 }

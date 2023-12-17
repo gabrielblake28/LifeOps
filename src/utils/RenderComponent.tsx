@@ -7,7 +7,7 @@ export function RenderTaskComponent(data: Task[]): JSX.Element[] {
   const elementsToRender: JSX.Element[] = [];
 
   data.forEach((task, key) => {
-    elementsToRender.push(<TaskCard key={key} id={task.id} title={task.title} status={task.status} points={task.points} />);
+    elementsToRender.push(<TaskCard key={key} task={task} />);
   });
 
   return elementsToRender;

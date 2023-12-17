@@ -3,14 +3,14 @@ import { useTheme } from '@mui/material/styles';
 import { Box, ClickAwayListener, IconButton, Paper, Popper, useMediaQuery } from '@mui/material';
 import MainCard from 'components/MainCard';
 import Transitions from 'components/@extended/Transitions';
-
+import { usePopperStore } from 'zustand-store/PopperRef';
 import { CloseOutlined, PlusOutlined } from '@ant-design/icons';
 import { CreateTask } from 'pages/dashboard/create-task/CreateTask';
 
 const Notification = () => {
   const theme = useTheme();
   const matchesXs = useMediaQuery(theme.breakpoints.down('md'));
-  const anchorRef = useRef<HTMLButtonElement | null>(null);
+  const { anchorRef } = usePopperStore();
   const [open, setOpen] = useState(false);
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);

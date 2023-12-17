@@ -20,10 +20,8 @@ type CustomSelectProps = {
 export const CustomSelect = ({ title, value, options, error, touched, handleBlur, handleChange }: CustomSelectProps) => {
   return (
     <Stack sx={{ width: '100%' }} spacing={1} padding={1}>
-      {/* <InputLabel>{title}</InputLabel> */}
-      <InputLabel id="demo-simple-select-label">{title}</InputLabel>
+      <InputLabel>{title}</InputLabel>
       <Select
-        labelId="demo-simple-select-label"
         label={title}
         value={value}
         onChange={handleChange}
