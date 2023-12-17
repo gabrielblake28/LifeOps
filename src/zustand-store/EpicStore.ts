@@ -5,13 +5,13 @@ import { EpicApi } from 'Api/Epic/impl/EpicApi';
 const epicApi = new EpicApi();
 interface EpicStore {
   Epics: Epic[];
-  fetchEpics: (user_id: string) => Promise<void>;
+  FetchEpics: (user_id: string) => Promise<void>;
   AddEpic: (epicPayload: CreateEpicPayload) => Promise<void>;
 }
 export const useEpicStore = create<EpicStore>((set) => ({
   Epics: [],
 
-  fetchEpics: async (user_id: string) => {
+  FetchEpics: async (user_id: string) => {
     try {
       const result = await epicApi.getAllEpics(user_id);
       set({ Epics: result });

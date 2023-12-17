@@ -7,6 +7,7 @@ import { CustomSelect } from 'components/CustomSelect';
 import { ColumnName } from '../../../Types/Task';
 import { useEpicStore } from 'zustand-store/EpicStore';
 import { EpicStatus } from '../../../Types/Epic';
+import { useTaskStore } from 'zustand-store/TaskStore';
 
 type CreateTaskProps = {
   handleToggle: () => void;
@@ -24,7 +25,8 @@ export const CreateTask = ({ handleToggle }: CreateTaskProps) => {
   const [isTaskValid, setIsTaskValid] = useState(true);
   const [isEpicValid, setIsEpicValid] = useState(true);
 
-  const { Epics, fetchEpics, AddEpic } = useEpicStore();
+  const { Epics, FetchEpics: fetchEpics, AddEpic } = useEpicStore();
+  const { AddTask } = useTaskStore();
 
   useEffect(() => {
     fetchEpics('1');
@@ -69,6 +71,7 @@ export const CreateTask = ({ handleToggle }: CreateTaskProps) => {
     AddEpic({ title: epicName, status: EpicStatus.IN_PROGRESS, user_id: '1' });
   };
   const CreateTask = () => {
+    AddTask({ title: taskName, status: taskStatus, points: taskPoints, epic_id: epic, user_id: '1' });
     handleToggle();
   };
 
