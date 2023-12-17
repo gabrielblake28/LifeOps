@@ -10,7 +10,7 @@ export class EpicApi implements IEpicApi {
     });
   }
 
-  async createEpic(payload: CreateEpicPayload): Promise<Epic> {
+  async createEpic(payload: CreateEpicPayload): Promise<string> {
     return await this.query.post('/epics', payload);
   }
   async getEpicbyId(id: string): Promise<Epic> {
@@ -20,7 +20,7 @@ export class EpicApi implements IEpicApi {
     const result = await (await this.query.get(`/epics/${user_id}`)).data;
     return result.data;
   }
-  async updateEpic(id: string, payload: Epic): Promise<Epic> {
+  async updateEpic(id: string, payload: Epic): Promise<string> {
     throw new Error('Method not implemented.');
   }
   deleteEpic(id: string): Promise<void> {

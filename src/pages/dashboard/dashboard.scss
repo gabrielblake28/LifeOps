@@ -26,8 +26,22 @@
   overflow: auto;
   border-radius: 15px;
   padding: 10px;
-  width: 100%;
   @media screen and (max-width: 1015px) {
     height: auto;
   }
+}
+
+/* WebKit browsers like Chrome and Safari */
+.droppable-column::-webkit-scrollbar {
+  width: 6px;
+}
+
+.droppable-column::-webkit-scrollbar-thumb {
+  background-color: #ece6e6;
+  border-radius: 6px;
+}
+
+.droppable-column::-webkit-scrollbar-track {
+  // background-color: #f0f0f0;
+  border-radius: 6px;
 }

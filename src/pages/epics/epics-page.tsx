@@ -9,7 +9,7 @@ import { useEpicStore } from 'zustand-store/EpicStore';
 import { useEffect } from 'react';
 
 const EpicsPage = () => {
-  const { Epics, fetchEpics } = useEpicStore();
+  const { Epics, FetchEpics: fetchEpics } = useEpicStore();
 
   useEffect(() => {
     fetchEpics('1');

@@ -1,14 +1,13 @@
-import { CreateTask } from '../pages/dashboard/create-task/CreateTask';
-
-export interface Task extends CreateTask {
+export interface Task extends CreateTaskPayload {
   id: string;
 }
 
-export interface CreateTask {
+export interface CreateTaskPayload {
   title: string;
   points: number;
   status: string;
   epic_id: string;
+  user_id: string;
 }
 
 export enum ColumnName {
