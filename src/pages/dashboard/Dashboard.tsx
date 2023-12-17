@@ -7,21 +7,19 @@ import { useTaskStore } from 'zustand-store/TaskStore';
 import { useEffect } from 'react';
 
 export function DashboardDefault() {
-  const { Tasks, FetchTasks } = useTaskStore();
+  const { Tasks, FetchTasks, UpdateTaskStatusForDashboard, GetTaskById } = useTaskStore();
 
   useEffect(() => {
     FetchTasks('1');
   }, [FetchTasks]);
 
-  const HandleOnDrop = (e: React.DragEvent, newStatus: ColumnName) => {
+  const HandleOnDrop = async (e: React.DragEvent, newStatus: ColumnName) => {
     const taskId = e.dataTransfer.getData('id');
-    const taskStatus = e.dataTransfer.getData('status');
+    const task = await GetTaskById(taskId);
 
-    // const task = Tasks[taskStatus].find((t) => t.id === taskId);
-
-    // if (task && task.status !== newStatus) {
-    //    updateTasks(task, newStatus);
-    // }
+    if (task && task.status !== newStatus) {
+      UpdateTaskStatusForDashboard(task, newStatus);
+    }
   };
 
   const HandleDragOver = (e: React.DragEvent) => {

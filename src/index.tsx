@@ -19,11 +19,12 @@ import reportWebVitals from './reportWebVitals';
 // ==============================|| MAIN - REACT DOM RENDER  ||============================== //
 
 const container = document.getElementById('root');
-const root = createRoot(container!); // createRoot(container!) if you use TypeScript
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+const root = createRoot(container!);
 root.render(
   <StrictMode>
     <ReduxProvider store={store}>
-      <BrowserRouter basename="/home">
+      <BrowserRouter basename="/">
         <App />
       </BrowserRouter>
     </ReduxProvider>

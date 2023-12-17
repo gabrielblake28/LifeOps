@@ -13,15 +13,16 @@ export class TaskApi implements ITaskApi {
   async createTask(payload: CreateTaskPayload): Promise<Task> {
     return await this.query.post('/tasks', payload);
   }
-  async getTaskbyId(id: string): Promise<Task> {
-    throw new Error('Method not implemented.');
+  async getTaskbyId(id: string, user_id: string): Promise<Task> {
+    const result = await (await this.query.get(`/tasks/${user_id}/${id}`)).data;
+    return result.data;
   }
   async getAllTasks(user_id: string): Promise<Record<string, Task[]>> {
     const result = await (await this.query.get(`/tasks/${user_id}`)).data;
     return result.data;
   }
-  async updateTask(id: string, payload: Task): Promise<string> {
-    throw new Error('Method not implemented.');
+  async updateTask(payload: Task): Promise<string> {
+    return await this.query.put(`/tasks/${payload.id}`, payload);
   }
   async deleteTask(id: string): Promise<void> {
     throw new Error('Method not implemented.');
