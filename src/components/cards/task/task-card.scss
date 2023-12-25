@@ -1,6 +1,6 @@
 .card-animation {
   transition: transform 0.15s ease;
-  width: 245px;
+  max-width: 245px;
   min-height: 130px;
   cursor: pointer;
 }

@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { Task, ColumnName, CreateTaskPayload } from '../Types/Task';
 import { TaskApi } from 'Api/Task/impl/TaskApi';
+import dayjs from 'dayjs';
 
 const taskApi = new TaskApi();
 
@@ -40,7 +41,19 @@ export const useTaskStore = create<TaskStore>((set) => ({
   },
 
   UpdateTask: async (task: Task, newStatus?: ColumnName) => {
-    await taskApi.updateTask({ ...task, status: newStatus ?? task.status });
+    let deadline = null;
+    if (newStatus === ColumnName.ACTIVE) {
+      deadline = dayjs().add(task.points, 'day').format('YYYY-MM-DD');
+    } else if (newStatus === ColumnName.RESOLVED) {
+      if (task.deadline) {
+        const diff = dayjs().diff(dayjs(task.deadline), 'day');
+        const awardedPoints = task.points - diff;
+        // set users awarded point += awardedPoints
+      } else {
+        // add awarded_points to user
+      }
+    }
+    await taskApi.updateTask({ ...task, status: newStatus ?? task.status, deadline: deadline });
     const updatedTasks = await taskApi.getAllTasks('1'); // task.user_id
     set(() => ({ Tasks: updatedTasks }));
   },

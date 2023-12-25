@@ -8,6 +8,7 @@ export interface CreateTaskPayload {
   status: string;
   epic_id: string;
   user_id: string;
+  deadline?: string | null;
 }
 
 export enum ColumnName {

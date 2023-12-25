@@ -1,11 +1,11 @@
 import './dashboard.scss';
 import { ColumnName } from '../../Types/Task';
 import { useTaskStore } from 'zustand-store/TaskStore';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { DashboardColumn } from './DashboardColumn';
 
 export function DashboardDefault() {
-  const { Tasks, FetchTasks, UpdateTask: UpdateTaskStatusForDashboard, GetTaskById } = useTaskStore();
+  const { Tasks, FetchTasks, UpdateTask: UpdateTask, GetTaskById } = useTaskStore();
 
   useEffect(() => {
     FetchTasks('1');
@@ -16,7 +16,7 @@ export function DashboardDefault() {
     const task = await GetTaskById(taskId);
 
     if (task && task.status !== newStatus) {
-      UpdateTaskStatusForDashboard(task, newStatus);
+      UpdateTask(task, newStatus);
     }
   };
 
